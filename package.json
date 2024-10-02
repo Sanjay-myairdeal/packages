@@ -1,0 +1,25 @@
+{
+  "name": "packages_backend",
+  "version": "1.0.0",
+  "description": "MyAirDeal Packages Website Backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "Packages",
+    "Myairdeal"
+  ],
+  "author": "MyAirDeal",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-router": "^0.0.1",
+    "mongoose": "^8.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "save": "^2.9.0"
+  }
+}
