@@ -70,8 +70,8 @@ exports.sendEmail= async(req, res) => {
   const { name, phone,email, passengers, departure, date } = req.body;
 
   const mailOptions = {
-      from: 'satrunsince2003@gmail.com', // sender address
-      to: email, // receiver address
+      from: email, // sender address
+      to: 'satrunsince2003@gmail.com', // receiver address
       subject: 'New Booking Inquiry',
       html: `
           <h2>Booking Details</h2>
