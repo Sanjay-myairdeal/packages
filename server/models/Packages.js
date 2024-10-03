@@ -4,22 +4,23 @@ const packagesSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  email:{
+    type:String,
+    required:true
+  },
   phone: {
     type: String,
     required: true,
   },
   departure: {
-    type: String,
-    required: true,
+    type: String
   },
 
   passengers: {
-    type: String,
-    required: true,
+    type: String
   },
   date: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 
