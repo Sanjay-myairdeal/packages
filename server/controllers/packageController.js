@@ -5,8 +5,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',  // or any other email provider you use
   auth: {
-      user: 'satrunsince2003@gmail.com', // your email address
-      pass: 'tmhw petk fucp xqgy',  // your email password or an app-specific password
+      user: 'support@myairdeal.com', // your email address
+      pass: 'bkcd hupf zdur qimw',  // your email password or an app-specific password
   },
 });
 // Controller to get data
