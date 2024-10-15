@@ -1,12 +1,12 @@
 const Packages = require("../models/Packages");
 const nodemailer = require('nodemailer');
-
-
+const dotenv = require("dotenv");
+dotenv.config();
 const transporter = nodemailer.createTransport({
   service: 'gmail',  // or any other email provider you use
   auth: {
-      user: 'support@myairdeal.com', // your email address
-      pass: 'bkcd hupf zdur qimw',  // your email password or an app-specific password
+      user: process.env.USER, // your email address
+      pass: process.env.GMAIL_APP_PASSWORD,  // your email password or an app-specific password
   },
 });
 // Controller to get data
