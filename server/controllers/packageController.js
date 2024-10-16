@@ -70,7 +70,7 @@ exports.sendEmail= async(req, res) => {
   const { name, phone,email, passengers, departure, date } = req.body;
 // console.log(email)
   const mailOptions = {
-      from: email, // sender address
+      from:'no-reply@myairdeal.com', // sender address
       to: 'support@myairdeal.com', // receiver address
       subject: 'New Booking Inquiry',
       html: `
