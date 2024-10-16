@@ -68,10 +68,10 @@ exports.getAllCustomers=async(req,res)=>{
  */
 exports.sendEmail= async(req, res) => {
   const { name, phone,email, passengers, departure, date } = req.body;
-
+// console.log(email)
   const mailOptions = {
       from: email, // sender address
-      to: 'satrunsince2003@gmail.com', // receiver address
+      to: 'support@myairdeal.com', // receiver address
       subject: 'New Booking Inquiry',
       html: `
           <h2>Booking Details</h2>
@@ -83,6 +83,7 @@ exports.sendEmail= async(req, res) => {
           <p><strong>Date:</strong> ${date}</p>
       `,
   };
+  // console.log(mailOptions)
   transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
           console.log(error);
