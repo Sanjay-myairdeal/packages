@@ -5,8 +5,8 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   service: 'gmail',  // or any other email provider you use
   auth: {
-      user: process.env.USER, // your email address
-      pass: process.env.GMAIL_APP_PASSWORD,  // your email password or an app-specific password
+    user: process.env.GMAIL_USER, // your email address
+    pass: process.env.GMAIL_APP_PASSWORD,  // your email password or an app-specific password
   },
 });
 // Controller to get data
@@ -23,10 +23,10 @@ exports.getData = (req, res) => {
 exports.addCustomer = async (req, res) => {
   try {
     // Destructure fields from the request body
-    const { name, phone,email, departure, passengers, date } = req.body;
-if(!name || !phone || !email ){
-    return res.status(404).json({message:"missing fileds"});
-}
+    const { name, phone, email, departure, passengers, date } = req.body;
+    if (!name || !phone || !email) {
+      return res.status(404).json({ message: "missing fileds" });
+    }
     // Create a new package object using the model
     const newPackage = new Packages({
       name,
@@ -49,31 +49,31 @@ if(!name || !phone || !email ){
   }
 };
 
-exports.getAllCustomers=async(req,res)=>{
-    try {
-        const data=await Packages.find({});
-        if(!data){
-            return res.status(404).json({message:"No data Found"});
-        }
-        return res.status(200).json({message:"Data fetched Successfully",data:data})
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({message:"Server Error"})
+exports.getAllCustomers = async (req, res) => {
+  try {
+    const data = await Packages.find({});
+    if (!data) {
+      return res.status(404).json({ message: "No data Found" });
     }
+    return res.status(200).json({ message: "Data fetched Successfully", data: data })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Server Error" })
+  }
 }
 
 
 /**
  * Mail
  */
-exports.sendEmail= async(req, res) => {
-  const { name, phone,email, passengers, departure, date } = req.body;
-// console.log(email)
+exports.sendEmail = async (req, res) => {
+  const { name, phone, email, passengers, departure, date } = req.body;
+  // console.log(email)
   const mailOptions = {
-      from:'no-reply@myairdeal.com', // sender address
-      to: 'support@myairdeal.com', // receiver address
-      subject: 'New Booking Inquiry',
-      html: `
+    from: 'no-reply@myairdeal.com', // sender address
+    to: 'support@myairdeal.com', // receiver address
+    subject: 'New Booking Inquiry',
+    html: `
           <h2>Booking Details</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Phone:</strong> ${phone}</p>
@@ -85,12 +85,12 @@ exports.sendEmail= async(req, res) => {
   };
   // console.log(mailOptions)
   transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          console.log(error);
-          res.status(500).send({ success: false, message: 'Email not sent' });
-      } else {
-          // console.log('Email sent: ' + info.response);
-          res.status(200).send({ success: true, message: 'Email sent successfully' });
-      }
+    if (error) {
+      console.log(error);
+      res.status(500).send({ success: false, message: 'Email not sent' });
+    } else {
+      // console.log('Email sent: ' + info.response);
+      res.status(200).send({ success: true, message: 'Email sent successfully' });
+    }
   });
 };
