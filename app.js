@@ -19,7 +19,7 @@ app.use("/api/v1/packages", packageRoutes);
 /**
  * Db connection
  */
-dbConnect();
+// dbConnect();
 app.listen(port, (req, res) => {
   console.log(`Server is runnning at ${port}`);
 });
