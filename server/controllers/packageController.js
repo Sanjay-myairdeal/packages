@@ -94,3 +94,37 @@ exports.sendEmail= async(req, res) => {
       }
   });
 };
+
+/**
+ * Umrah mail api
+ */
+exports.umrahMail = async (req, res) => {
+  try {
+    const { name, email, phone, origin, pax, message } = req.body;
+
+    const mailOptions = {
+      from: "no-reply@gmail.com",
+      to: "support@myairdeal.com",
+      subject: "Umrah Package Booking",
+      html: `
+        <h1>Umrah Booking Enquiry</h1>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone Number:</strong> ${phone}</p>
+        <p><strong>Origin:</strong> ${origin}</p>
+        <p><strong>Pax:</strong> ${pax}</p>
+        <p><strong>Message:</strong> ${message}</p>`,
+    };
+
+    // Send the email and wait for confirmation
+    const info = await transporter.sendMail(mailOptions);
+
+    // Log the info for debugging
+    // console.log("Email sent:", info.response);
+    return res.status(200).json({ success: true, message: "Email sent successfully" });
+
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return res.status(500).json({ success: false, message: "Failed to send email" });
+  }
+};
