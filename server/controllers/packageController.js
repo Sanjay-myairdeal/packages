@@ -70,8 +70,8 @@ exports.sendEmail= async(req, res) => {
   const { name, phone,email, passengers, departure, date } = req.body;
 // console.log(email)
   const mailOptions = {
-      from:'sanjaykandula3@gmail.com', // sender address
-      to: 'sanjaykandula3@gmail.com', // receiver address
+      from:'', // sender address
+      to: '', // receiver address
       subject: 'New Booking Inquiry',
       html: `
           <h2>Booking Details</h2>
@@ -101,7 +101,7 @@ exports.umrahMail = async (req, res) => {
     const { name, email, phone, origin, pax, message } = req.body;
 
     const mailOptions = {
-      from: "sanjaykandula3@gmail.com",
+      from: "no-reply@gmail.com",
       to: "sanjaykandula3@gmail.com",
       subject: "Umrah Package Booking",
       html: `
@@ -118,7 +118,7 @@ exports.umrahMail = async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
 
     // Log the info for debugging
-    console.log("Email sent:", info.response);
+    // console.log("Email sent:", info.response);
     return res.status(200).json({ success: true, message: "Email sent successfully" });
 
   } catch (error) {
