@@ -66,35 +66,36 @@ exports.getAllCustomers = async (req, res) => {
 /**
  * Mail
  */
-exports.sendEmail = async (req, res) => {
-  const { name, phone, email, passengers, departure, date } = req.body;
-  // console.log(email)
+exports.sendEmail= async(req, res) => {
+  const { name, phone,email, pax, origin, date , packageName } = req.body;
+  const formatedPackage=packageName && packageName.length > 0 ? packageName : "Interested"
+// console.log(email)
   const mailOptions = {
-    from: 'no-reply@myairdeal.com', // sender address
-    to: 'support@myairdeal.com', // receiver address
-    subject: 'New Booking Inquiry',
-    html: `
-          <h2>Booking Details</h2>
+      from:'no-reply@gmail.com', // sender address
+      to: 'support@myairdeal.com', // receiver address
+      subject: 'New Booking Inquiry',
+      html: `
+          <h2>Package Booking Details</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Email:</strong>${email}</p>
-          <p><strong>Passengers:</strong> ${passengers}</p>
-          <p><strong>Departure City:</strong> ${departure}</p>
+          <p><strong>Pax:</strong> ${pax}</p>
+          <p><strong>Origin City:</strong> ${origin}</p>
           <p><strong>Date:</strong> ${date}</p>
+          <p><strong>Package Searched For:</strong>${formatedPackage}</p>
       `,
   };
   // console.log(mailOptions)
   transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-      res.status(500).send({ success: false, message: 'Email not sent' });
-    } else {
-      // console.log('Email sent: ' + info.response);
-      res.status(200).send({ success: true, message: 'Email sent successfully' });
-    }
+      if (error) {
+          console.log(error);
+          res.status(500).send({ success: false, message: 'Email not sent' });
+      } else {
+          // console.log('Email sent: ' + info.response);
+          res.status(200).send({ success: true, message: 'Email sent successfully' });
+      }
   });
 };
-
 /**
  * Umrah mail api
  */
