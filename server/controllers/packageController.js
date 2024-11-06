@@ -64,23 +64,25 @@ exports.getAllCustomers=async(req,res)=>{
 
 
 /**
- * Mail
+ * Packages Mail
  */
 exports.sendEmail= async(req, res) => {
-  const { name, phone,email, passengers, departure, date } = req.body;
+  const { name, phone,email, pax, origin, date , packageName } = req.body;
+  const formatedPackage=packageName && packageName.length > 0 ? packageName : "Interested"
 // console.log(email)
   const mailOptions = {
-      from:'', // sender address
-      to: '', // receiver address
+      from:'no-reply@gmail.com', // sender address
+      to: 'sanjaykandula3@gmail.com', // receiver address
       subject: 'New Booking Inquiry',
       html: `
-          <h2>Booking Details</h2>
+          <h2>Package Booking Details</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Email:</strong>${email}</p>
-          <p><strong>Passengers:</strong> ${passengers}</p>
-          <p><strong>Departure City:</strong> ${departure}</p>
+          <p><strong>Pax:</strong> ${pax}</p>
+          <p><strong>Origin City:</strong> ${origin}</p>
           <p><strong>Date:</strong> ${date}</p>
+          <p><strong>Package Searched For:</strong>${formatedPackage}</p>
       `,
   };
   // console.log(mailOptions)
@@ -94,7 +96,9 @@ exports.sendEmail= async(req, res) => {
       }
   });
 };
-
+/**
+ * Umrah Mail
+ */
 
 exports.umrahMail = async (req, res) => {
   try {
